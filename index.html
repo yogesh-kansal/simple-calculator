@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<head>
+    <title>Calculator</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style type="text/css">
+        .row1,.row2,.row3,.row4,.row5 {
+            list-style-type: none;
+            display: inline-block;
+
+            background-color: rgb(89, 89, 247);
+           outline: none;
+            text-decoration: none;
+            display: inline-block;
+            width: 19.3%;
+            margin-left: .625%;
+            text-align: center;
+            line-height: 3;
+            color: white;
+            text-transform: capitalize;
+
+        }
+        
+
+        body{
+            background-color: pink;
+            text-align: center;
+            margin-top: 6.25%;
+            font-size:100%;
+        }
+        #display{
+            width: 19.3%;
+            margin-left: .625%;
+            text-align: right;
+            line-height: 2;
+            color:black;
+            background-color: #DDDDDD;
+            font-size:20px;
+
+            
+        }
+        button {
+            width: 20%;
+            height: 50%;
+            font-size:20px;
+        }
+        .foot {
+            margin-top:10%; 
+        }
+
+
+}
+
+    </style>
+    <script language ="javascript">
+        
+        var arr=[];
+        let i=1;
+        //var ans = document.getElementById('display');
+    
+        function append(z) {
+            const ans = document.getElementById('display');
+            ans.textContent+=z;
+            arr.push(z);
+        }
+        function del() {
+
+
+                const ans=document.getElementById('display');
+                arr=[];
+                ans.textContent='';
+                //console.log(arr);
+                
+            }
+        function clear_() {
+            const ans=document.getElementById('display');
+            let q=ans.textContent;
+            ans.textContent=q.slice(0,-1);
+            
+
+        }
+
+        function answer() {
+            let p=1,A=0,B=0,K=-1,x=-1;
+            const ans=document.getElementById('display');
+            ans.textContent+="\n";
+            for(let i=arr.length-1;i>=0;i--)
+            {
+                
+                if(arr[i]== '+' || arr[i]=='-'|| arr[i]=='*'|| arr[i]=='/'){
+                     x=i;
+                    break;
+             
+                }
+
+                A=A+(arr[i]*p);
+                p=p*10;
+                
+                
+            }
+            if(x===-1)
+            {
+                ans.textContent+=A;
+            }
+            else{
+                k=x;
+                x--;
+                p=1;
+                
+                while(x>=0)
+                {
+                    
+                    B=B+(arr[x]*p);
+                    p=p*10;
+                    x--;
+                }
+            
+                if(arr[k]==='+'){
+                    ans.textContent+=((A+B).toString(10));
+                }
+                else if(arr[k]==='-')
+                {
+                    ans.textContent+=(B-A).toString();
+                }
+                else if(arr[k]==='*')
+                {
+                    ans.textContent+=(A*B).toString();
+                }
+                else{
+                    if(B===0)
+                        ans.textContent+="ERROR";
+                    else
+                    {
+                        ans.textContent+=(B/A).toString();
+                    }
+                }
+            }
+
+            
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1 style="color: #001f3f">Welcome to digital calculator.</h1>
+
+    </header>
+    <textarea  readonly id="display"  name="display" ></textarea> <br>
+    <div class="row5">
+        <button type="submit" id="one" onclick="del()">AC</button>
+        <button type="submit"  onclick="clear_()"><i class="fa fa-arrow-circle-left"></i></button>
+        <button type="submit" id="three" >%</button>
+        <button type="submit" id="div" onclick="append('/')">/</button>
+    </div ><br>
+    <div class="row1">
+        <button type="submit" id="one" onclick="append(1)">1</button>
+        <button type="submit" id="two" onclick="append(2)">2</button>
+        <button type="submit" id="three" onclick="append(3)">3</button>
+        <button type="submit" id="plus" onclick="append('*')" >*</button>
+    </div ><br>
+    <div class="row2">
+        <button type="submit" id="four"onclick="append(4)" >4</button>
+        <button type="submit" id="five" onclick="append(5)">5</button>
+        <button type="submit" id="six" onclick="append(6)">6</button>
+        <button type="submit" id="minus" onclick="append('-')">-</button>
+    </div><br>
+    <div class="row3">
+        <button type="submit" id="sev" onclick="append(7)">7</button>
+        <button type="submit" onclick="append(8)">8</button>
+        <button type="submit" onclick="append(9)">9</button>
+        <button type="submit"onclick="append('+')" >+</button>
+    </div><br>
+        <div class="row4">
+        <button type="submit">*</button>
+        <button type="submit" onclick="append(0)">0</button>
+        <button type="submit">#</button>
+        <button type="submit" onclick="answer()">=</button>
+    </div>
+    <footer class="foot">
+        <p style="font-size: 18px">Powered by yogesh kansal</p>
+        <a href=""><i style=" font-size:48px;background-color: blue;color:white" class="fa">&#xf08c;</i></a>
+        
+    </footer>
+</body>
+</html>
